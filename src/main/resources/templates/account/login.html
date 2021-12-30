@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+
+<body>
+    <h1>This is login</h1>
+    <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto ">
+        <div class="p-3 rounded">
+            <p>Nhập tài khoản và mật khẩu của bạn</p>
+            <p>
+                <input type="username" name="username" class="form-control" placeholder="Tài khoản" required autofocus>
+            </p>
+            <p>
+                <input type="password" name="password" class="form-control" placeholder="Mật khẩu" required/>
+            </p>
+            <p>
+                <input type="checkbox" name="remember-me"> Nhớ tài khoản
+            </p>
+            <p>
+                <input type="submit" value="Đăng nhập" class="btn btn-primary">
+            </p>
+        </div>
+    </form>
+</body>
+
+</html>

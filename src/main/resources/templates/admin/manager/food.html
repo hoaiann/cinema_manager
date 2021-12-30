@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Food</title>
+</head>
+<body>
+<h1>This is list food</h1>
+
+<table th:each="element :${listFood}">
+    <tbody>
+        <tr>
+            <td th:text="${element.id}"></td>
+            <td class="name-food" th:text="${element.name}"></td>
+        </tr>
+    </tbody>
+</table>
+
+</div>
+</body>
+</html>
+
+<style>
+    .name-food{
+        background-color: red;
+        text-size: 30px;
+    }
+</style>
