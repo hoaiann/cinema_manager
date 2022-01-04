@@ -14,6 +14,13 @@ public class Cart {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Long cartId;
 
+    public Long getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(Long cartId) {
+        this.cartId = cartId;
+    }
 }

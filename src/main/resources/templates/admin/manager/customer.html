@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:with="currentPage='admin/manager/customer'"
+      layout:decorate="~{layout/admin.html}"
+>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Khách hàng</title>
+</head>
+
+<body>
+
+
+<section  layout:fragment="custom-content">
+
+    <div class="content-right__control">
+        <button class="btn btn-add  btn-add-show-modal">
+            Thêm
+        </button>
+    </div>
+    <table th:if="${#arrays.length(listCustomer)}!= 0">
+        <thead>
+            <tr>
+                <th>Số thứ tự</th>
+                <th>Họ và tên</th>
+                <th>Tên đăng nhập</th>
+                <th>Số CMND</th>
+                <th>Số điện thoại</th>
+                <th>Email</th>
+                <th>Địa chỉ</th>
+                <th>Giới tính</th>
+                <th>Ngày đăng ký</th>
+                <th>Quyền</th>
+                <th>Trạng thái hoạt động</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="element,iterStat  :${listCustomer}">
+            <td th:text="${iterStat.count}"></td>
+            <td th:text="${element.fullName}"></td>
+            <td th:text="${element.user.username}"></td>
+            <td th:text="${element.cmnd}"></td>
+            <td th:text="${element.phone}"></td>
+            <td th:text="${element.email}"></td>
+            <td th:text="${element.address}"></td>
+            <td th:text="${element.male}?'Nam':'Nữ'"></td>
+            <td th:text="${element.dateRegister}"></td>
+            <td th:text="${element.user.roles}"></td>
+            <td th:text="${element.user.active}== true ?'Hoạt động': 'Không hoạt động'"></td>
+            <td>
+                <a class="btn btn-edit btn-edit-customer"
+                   th:href="@{/admin/manager/getCustomerById/(id=${element.id}) }">Sửa</a>
+                <!--<a  th:href="@{/admin/manager/delete/{id}(id=${element.id}) }">delete</a>-->
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="modal modal-add">
+        <form th:action="@{/admin/manager/saveCustomer}" method="POST">
+            <div class="modal__container">
+                <div class="modal__close">
+                    <i class="fas fa-times"></i>
+                </div>
+                <div class="modal__header">
+                    <div class="modal__header-title">
+                        Thêm khách hàng
+                    </div>
+
+                </div>
+                <div class="modal__body">
+                    <div class="wrap-input">
+                        <div class="wrap-input-item wrap-input-code">
+                            <label for="fullName" class="modal-label">
+                                Họ và tên
+                            </label>
+                            <input type="text" id="fullName" class="modal-input" name="fullName" >
+                        </div>
+
+                        <div class="wrap-input-item wrap-input-code">
+                            <label for="username" class="modal-label">
+                                Username
+                            </label>
+                            <input type="text" id="username" required class="modal-input" name="username">
+                        </div>
+                    </div>
+
+
+                    <div class="wrap-input">
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="cmnd" class="modal-label">
+                                Số chứng minh nhân dân
+                            </label>
+                            <input type="text" id="cmnd" class="modal-input" name="cmnd">
+                        </div>
+
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="phone" class="modal-label">
+                                Số điện thoại
+                            </label>
+                            <input type="text" id="phone" class="modal-input" name="phone">
+                        </div>
+                    </div>
+
+                    <div class="wrap-input">
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="email" class="modal-label">
+                                Email
+                            </label>
+                            <input type="text" id="email" class="modal-input" name="email">
+                        </div>
+
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="address" class="modal-label">
+                                Địa chỉ
+                            </label>
+                            <input type="text" id="address" class="modal-input" name="address">
+                        </div>
+                    </div>
+
+                    <div class="wrap-input">
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="male" class="modal-label">
+                                Giới tính
+                            </label>
+                            <select class="modal-input" id="male" name="male">
+                                <option value="true" selected>Nam</option>
+                                <option value="false">Nữ</option>
+                            </select>
+                        </div>
+
+                        <div class="wrap-input-item  wrap-input-code">
+                            <div class="wrap-input-item  wrap-input-code">
+                                <label for="date-register" class="modal-label">
+                                    Ngày đăng ký tài khoản
+                                </label>
+                                <input type="date" id="date-register" required class="modal-input" name="dateRegister">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="wrap-input">
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="roles" class="modal-label">
+                                Quyền
+                            </label>
+                            <select class="modal-input" id="roles" name="roles">
+                                <option value="ROLE_ADMIN">Admin</option>
+                                <option value="ROLE_EMPLOYEE">Nhân viên</option>
+                                <option value="ROLE_CUSTOMER" selected>Khách hàng</option>
+                            </select>
+                        </div>
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="is-active" class="modal-label">
+                                Trạng thái
+                            </label>
+                            <select class="modal-input" id="is-active" name="active">
+                                <option value="true" selected>Hoạt động</option>
+                                <option value="false">Không hoạt động</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <button class="btn btn-add" id="add-film">
+                        Thêm
+                    </button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+    <div class="modal modal-edit">
+        <form th:action="@{/admin/manager/editCustomer}" method="POST">
+            <div class="modal__container">
+                <div class="modal__close">
+                    <i class="fas fa-times"></i>
+                </div>
+                <div class="modal__header">
+                    <div class="modal__header-title">
+                        Sửa thông tin khách hàng
+                    </div>
+
+                </div>
+
+
+                <div class="modal__body">
+                    <input type="hidden" id="id-customer" class="modal-input" name="id">
+                    <input type="hidden" id="id-cart" class="modal-input" name="cartId">
+                    <div class="wrap-input">
+                        <div class="wrap-input-item wrap-input-code">
+                            <label for="fullName-edit" class="modal-label">
+                                Họ và tên
+                            </label>
+                            <input type="text" id="fullName-edit" class="modal-input" name="fullName">
+                        </div>
+
+                        <div class="wrap-input-item wrap-input-code">
+                            <label for="username-edit" class="modal-label">
+                                Username
+                            </label>
+                            <input type="text" id="username-edit" required class="modal-input disable-input"
+                                   name="username">
+                        </div>
+                    </div>
+
+
+                    <div class="wrap-input">
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="cmnd-edit" class="modal-label">
+                                Số chứng minh nhân dân
+                            </label>
+                            <input type="text" id="cmnd-edit" class="modal-input" name="cmnd">
+                        </div>
+
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="phone-edit" class="modal-label">
+                                Số điện thoại
+                            </label>
+                            <input type="text" id="phone-edit" class="modal-input" name="phone">
+                        </div>
+                    </div>
+
+                    <div class="wrap-input">
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="email-edit" class="modal-label">
+                                Email
+                            </label>
+                            <input type="text" id="email-edit" class="modal-input" name="email">
+                        </div>
+
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="address-edit" class="modal-label">
+                                Địa chỉ
+                            </label>
+                            <input type="text" id="address-edit" class="modal-input" name="address">
+                        </div>
+                    </div>
+
+                    <div class="wrap-input">
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="male-edit" class="modal-label">
+                                Giới tính
+                            </label>
+                            <select class="modal-input" id="male-edit" name="male">
+                                <option value="true" selected>Nam</option>
+                                <option value="false">Nữ</option>
+                            </select>
+                        </div>
+
+                        <div class="wrap-input-item  wrap-input-code">
+                            <div class="wrap-input-item  wrap-input-code">
+                                <label for="date-register-edit" class="modal-label">
+                                    Ngày đăng ký tài khoản
+                                </label>
+                                <input type="date" id="date-register-edit" class="modal-input" name="dateRegister">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="wrap-input">
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="roles-edit" class="modal-label">
+                                Quyền
+                            </label>
+                            <select class="modal-input" id="roles-edit" name="roles">
+                                <option value="ROLE_ADMIN">Admin</option>
+                                <option value="ROLE_EMPLOYEE">Nhân viên</option>
+                                <option value="ROLE_CUSTOMER">Khách hàng</option>
+                            </select>
+                        </div>
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="is-active-edit" class="modal-label">
+                                Trạng thái
+                            </label>
+                            <select class="modal-input" id="is-active-edit" name="active">
+                                <option value="true">Hoạt động</option>
+                                <option value="false">Không hoạt động</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <button class="btn btn-edit" id="edit-csutomer">
+                        Lưu
+                    </button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+
+    </div>
+
+    <div class="modal modal-delete">
+        <div class="modal__container">
+            <div class="modal__close">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="modal__header">
+                <div class="modal__header-title">
+                    Xóa phim
+                </div>
+            </div>
+            <div class="modal__body">
+                <div class="modal__body-question">
+                    Bạn có chắn chắn muốn xóa phim?
+                </div>
+                <div class="modal__confirm">
+                    <button class="btn btn-yes">Có</button>
+                    <button class="btn btn-no">Không</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+
+</html>
+

@@ -23,21 +23,10 @@ public class Customer {
     private String phone;
     private String email;
     private String address;
-    private boolean isMale;
+    @Column(nullable = false, columnDefinition = "TINYINT(1)")
+    private boolean male;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateRegister;
-
-    public Customer(String cmnd, String fullName, String phone, String email, String address, boolean isMale, LocalDate dateRegister, vnu.uet.cinema_manager.entity.Cart cart, User user) {
-        this.cmnd = cmnd;
-        this.fullName = fullName;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.isMale = isMale;
-        this.dateRegister = dateRegister;
-        Cart = cart;
-        this.user = user;
-    }
 
     @OneToOne
     @JoinColumn
@@ -46,6 +35,18 @@ public class Customer {
     @OneToOne
     @JoinColumn
     private User user;
+
+    public Customer(String cmnd, String fullName, String phone, String email, String address, boolean male, LocalDate dateRegister, vnu.uet.cinema_manager.entity.Cart cart, User user) {
+        this.cmnd = cmnd;
+        this.fullName = fullName;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.male = male;
+        this.dateRegister = dateRegister;
+        Cart = cart;
+        this.user = user;
+    }
 
     public Long getId() {
         return id;
@@ -96,11 +97,11 @@ public class Customer {
     }
 
     public boolean getMale() {
-        return isMale;
+        return male;
     }
 
     public void setMale(boolean male) {
-        isMale = male;
+        this.male = male;
     }
 
     public LocalDate getDateRegister() {
@@ -117,5 +118,17 @@ public class Customer {
 
     public void setCart(vnu.uet.cinema_manager.entity.Cart cart) {
         Cart = cart;
+    }
+
+    public boolean isMale() {
+        return male;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

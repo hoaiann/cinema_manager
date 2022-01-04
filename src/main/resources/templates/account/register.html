@@ -1,10 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title >Đăng ký</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+          integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
 </head>
+
 <body>
-    <h1>This is login</h1>
+<div class="form-login center">
+    <div class="form-login-overlay center">
+        <div class="modal-login center">
+            <form class="modal-login-center" th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto ">
+                <div class="center">
+                    <div class="title title-auth">Đăng ký</div>
+                </div>
+                <div>
+                    <div class="wrap-input">
+                        <div class="wrap-input-item ">
+                            <label for="usernmae" class="modal-label modal-label-auth">
+                                Tên đăng nhập
+                            </label>
+                            <input type="text"
+                                   id="usernmae"
+                                   class="modal-input modal-input-auth"
+                                   name="username"
+                                   required
+                                   autofocus
+                                   placeholder="Tài khoản">
+                        </div>
+                    </div>
+                    <div class="wrap-input">
+                        <div class="wrap-input-item ">
+                            <label for="password" class="modal-label modal-label-auth">
+                                Mật khẩu
+                            </label>
+                            <input type="password"
+                                   id="password"
+                                   class="modal-input modal-input-auth"
+                                   name="password"
+                                   required autofocus placeholder="Mật khẩu">
+                        </div>
+                    </div>
+                    <div class="wrap-input">
+                        <div class="wrap-input-item ">
+                            <label for="re-password" class="modal-label modal-label-auth">
+                                Nhập lại mật khẩu
+                            </label>
+                            <input type="password"
+                                   id="re-password"
+                                   class="modal-input modal-input-auth"
+                                   name="rePassword"
+                                   required autofocus placeholder="Nhập lại mật khẩu">
+                        </div>
+                    </div>
+                    <div class="wrap-input">
+                        <div class="wrap-input-item ">
+                            <input type="submit" value="Đăng ký" class="btn btn-edit btn-login">
+                        </div>
+                    </div>
+
+                    <div class="footer center">
+                        <div>
+                            Bạn đã có tài khoản?
+                        </div>
+                    </div>
+                    <div class="footer center">
+                        <a class="footer__link" href="/login">Đăng nhập</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

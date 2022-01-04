@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:with="currentPage='admin/statistic/bill'"
+      layout:decorate="~{layout/admin.html}"
+>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hóa đơn</title>
+</head>
+
+<body>
+<section layout:fragment="custom-content">
+    <table th:if="${#arrays.length(listTicketSold)}!= 0">
+        <thead>
+            <tr>
+                <th>Số thứ tự</th>
+                <th>Tên phim</th>
+                <th>Giá vé</th>
+                <th>Ngày chiếu</th>
+                <th>Thời gian chiếu</th>
+                <th>Đồ ăn</th>
+                <th>Giá</th>
+                <th>Tổng tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="element,iterStat  :${listTicketSold}">
+            <td th:text="${iterStat.count}"></td>
+            <td th:text="${element.filmCalendar.film.name}"></td>
+            <td th:text="${element.filmCalendar.film.price}"></td>
+            <td th:text="${element.filmCalendar.dateCalendar}"></td>
+            <td th:text="${element.filmCalendar.timeCalendar.getS}"></td>
+            <td th:text="${element.foodSold.foodDetail.food.name}"></td>
+            <td th:text="${element.foodSold.foodDetail.price}"></td>
+            <td th:text="${element.foodSold.foodDetail.price} + ${element.filmCalendar.film.price}"></td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+
+</body>
+</html>

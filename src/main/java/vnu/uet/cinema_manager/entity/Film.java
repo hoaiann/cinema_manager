@@ -28,9 +28,10 @@ public class Film {
     @Lob
     private String description;
     private String banner;
-    private boolean isActive;
+    @Column(nullable = false, columnDefinition = "TINYINT(1)")
+    private boolean active;
 
-    public Film(String name, String directors, String actors, String category, LocalDate openDay, String time, BigDecimal price, String description, String banner) {
+    public Film(String name, String directors, String actors, String category, LocalDate openDay, String time, BigDecimal price, String description, String banner, boolean active) {
         this.name = name;
         this.directors = directors;
         this.actors = actors;
@@ -40,7 +41,7 @@ public class Film {
         this.price = price;
         this.description = description;
         this.banner = banner;
-        this.isActive= true;
+        this.active= active;
     }
 
     public Film() {
@@ -126,11 +127,11 @@ public class Film {
         this.banner = banner;
     }
 
-    public boolean isActive() {
-        return isActive;
+    public boolean active() {
+        return active;
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.active = active;
     }
 }

@@ -15,13 +15,16 @@ public class Room {
     @Id
     @GeneratedValue
     private Long id;
-    private String roomName;
+    private String name;
     private Integer slot;
+    @Column(nullable = false, columnDefinition = "TINYINT(1)")
+    private boolean active;
 
 
-    public Room(String roomName, Integer slot) {
-        this.roomName = roomName;
+    public Room(String name, Integer slot) {
+        this.name = name;
         this.slot = slot;
+        this.active= true;
     }
 
     public Long getId() {
@@ -32,12 +35,12 @@ public class Room {
         this.id = id;
     }
 
-    public String getRoomName() {
-        return roomName;
+    public String getName() {
+        return name;
     }
 
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getSlot() {
@@ -46,5 +49,13 @@ public class Room {
 
     public void setSlot(Integer slot) {
         this.slot = slot;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

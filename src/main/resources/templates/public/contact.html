@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:with="currentPage='contact'"
+      layout:decorate="~{layout/default.html}"
+>
+<head>
+    <title>Trang chủ</title>
+</head>
+
+
+<body>
+<section layout:fragment="custom-content">
+    <main class="main-content">
+        <div class="container">
+            <div class="page">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h2>Liên hệ</h2>
+                            <ul class="contact-detail">
+                                <li>
+                                    <img th:src="@{/img/icon-contact-map.png}" alt="#">
+                                    <address><span>Đại học Công Nghệ</span> <br>144 Xuân Thủy, Dịch Vọng Hậu, Cầu Giấy, Hà Nội</address>
+                                </li>
+                                <li>
+                                    <img class="phone-img" th:src="@{/img/icon-contact-phone.png}" alt="">
+                                    <a href="tel:02437547461">024 37547 461</a>
+                                </li>
+                                <li>
+                                    <img class="mail-img" th:src="@{/img/icon-contact-message.png}" alt="">
+                                    <a href="hoidap@vnu.edu.vn">hoidap@vnu.edu.vn</a>
+                                </li>
+                            </ul>
+                            <div class="contact-form">
+                                <input type="text" class="name" placeholder="Tên của bạn...">
+                                <input type="text" class="email" placeholder="Email...">
+                                <input type="text" class="website" placeholder="Website...">
+                                <textarea class="message" placeholder="Tin nhắn..."></textarea>
+                                <input type="submit" value="Gửi tin nhắn">
+
+                            </div>
+                        </div>
+                        <div class="col-md-7 col-md-offset-1">
+                            <div class="map"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- .container -->
+    </main>
+</section>
+
+</body>
+
+</html>

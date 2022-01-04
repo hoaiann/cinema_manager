@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:with="currentPage='admin/manager/foodDetail'"
+      layout:decorate="~{layout/admin.html}"
+>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Loại đồ ăn</title>
+</head>
+
+<body>
+
+<section layout:fragment="custom-content">
+    <div class="content-right__control">
+        <button class="btn btn-add  btn-add-show-modal">
+            Thêm
+        </button>
+    </div>
+    <table th:if="${#arrays.length(listFoodDetail)}!= 0">
+        <thead>
+        <tr>
+            <th>Số thứ tự</th>
+            <th>Tên đồ ăn</th>
+            <th>Kích cỡ</th>
+            <th>Giá</th>
+            <th>Số lượng còn lại</th>
+            <th>Trạng thái hoạt động</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="element,iterStat :${listFoodDetail}">
+            <td th:text="${iterStat.count}"></td>
+            <td th:text="${element.food.name}"></td>
+            <td th:text="${element.size}"></td>
+            <td th:text="${element.price}"></td>
+            <td th:text="${element.count}"></td>
+            <td th:text="${element.active}== true? 'Hoạt động': 'Không hoạt động'"></td>
+            <td>
+                <a class="btn btn-edit btn-edit-food-detail"
+                   th:href="@{/admin/manager/getFoodDetailById/(id=${element.id}) }">Sửa</a>
+                <!--<a  th:href="@{/admin/manager/delete/{id}(id=${element.id}) }">Xóa</a>-->
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="modal modal-add">
+        <form th:action="@{/admin/manager/saveFoodDetail}" method="POST">
+            <div class="modal__container">
+                <div class="modal__close">
+                    <i class="fas fa-times"></i>
+                </div>
+                <div class="modal__header">
+                    <div class="modal__header-title">
+                        Thêm loại của đồ ăn
+                    </div>
+
+                </div>
+                <div class="modal__body">
+
+                    <div class="wrap-input">
+                        <div class="wrap-input-item">
+                            <label for="id-food" class="modal-label">
+                                Tên đồ ăn
+                            </label>
+                            <select class="modal-input" id="id-food" name="idFood">
+                                <option th:each="i : ${listFilm}" th:value="${i.id}" th:text="${i.name}"
+                                        th:selected="${i.name==''}"></option>
+                            </select>
+
+                        </div>
+                    </div>
+
+
+                    <div class="wrap-input">
+                        <div class="wrap-input-item">
+                            <label for="size" th:required="true" class="modal-label">
+                                Kích cỡ
+                            </label>
+                            <input type="text" id="size" class="modal-input" name="size">
+                        </div>
+
+                        <div class="wrap-input-item">
+                            <label for="price" class="modal-label">
+                                Giá
+                            </label>
+                            <input type="number" th:required="true" id="price" class="modal-input" name="price">
+                        </div>
+                    </div>
+
+                    <div class="wrap-input">
+                        <div class="wrap-input-item">
+                            <label for="count" class="modal-label">
+                                Số lượng còn lại
+                            </label>
+                            <input type="number" th:required="true" id="count" class="modal-input" name="count">
+                        </div>
+
+                        <div class="wrap-input-item">
+                            <label for="active" class="modal-label">
+                                Trạng thái
+                            </label>
+                            <select class="modal-input" id="active" name="active">
+                                <option value="true" selected>Hoạt động</option>
+                                <option value="false">Không hoạt động</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn-add" type="submit">
+                        Thêm
+                    </button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+    <div class="modal modal-edit">
+        <form th:action="@{/admin/manager/editFoodDetail}" method="POST">
+            <div class="modal__container">
+                <div class="modal__close">
+                    <i class="fas fa-times"></i>
+                </div>
+                <div class="modal__header">
+                    <div class="modal__header-title">
+                        Sửa thông tin đồ ăn
+                    </div>
+
+                </div>
+                <div class="modal__body">
+                    <input type="hidden" id="id-food-detail" class="modal-input" name="id">
+
+                    <div class="wrap-input">
+                        <div class="wrap-input-item">
+                            <label for="name-edit" class="modal-label">
+                                Tên đồ ăn
+                            </label>
+                            <input type="text" id="name-edit" class="modal-input disable-input" name="name">
+                        </div>
+                    </div>
+
+                    <div class="wrap-input">
+                        <div class="wrap-input-item">
+                            <label for="size-edit" class="modal-label">
+                                Kích cỡ
+                            </label>
+                            <input type="text" id="size-edit" class="modal-input disable-input" name="size">
+                        </div>
+
+                        <div class="wrap-input-item">
+                            <label for="price-edit" class="modal-label">
+                                Giá
+                            </label>
+                            <input type="number" id="price-edit" class="modal-input" name="price">
+                        </div>
+                    </div>
+
+                    <div class="wrap-input">
+                        <div class="wrap-input-item">
+                            <label for="count-edit" class="modal-label">
+                                Số lượng còn lại
+                            </label>
+                            <input type="number" id="count-edit" class="modal-input" name="count">
+                        </div>
+
+                        <div class="wrap-input-item">
+                            <label for="active-edit" class="modal-label">
+                                Trạng thái
+                            </label>
+                            <select class="modal-input" id="active-edit" name="active">
+                                <option value="true">Hoạt động</option>
+                                <option value="false">Không hoạt động</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-edit" type="submit">
+                        Lưu
+                    </button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+
+    </div>
+
+    <div class="modal modal-delete">
+        <div class="modal__container">
+            <div class="modal__close">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="modal__header">
+                <div class="modal__header-title">
+                    Xóa phim
+                </div>
+            </div>
+            <div class="modal__body">
+                <div class="modal__body-question">
+                    Bạn có chắn chắn muốn xóa phim?
+                </div>
+                <div class="modal__confirm">
+                    <button class="btn btn-yes">Có</button>
+                    <button class="btn btn-no">Không</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:insert="fragments/footer :: footer"></div>
+
+</section>
+</body>
+</html>
+

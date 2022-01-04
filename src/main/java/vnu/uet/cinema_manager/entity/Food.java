@@ -16,11 +16,12 @@ public class Food {
     @GeneratedValue
     private Long id;
     private String name;
-    private boolean isActive;
+    @Column(nullable = false, columnDefinition = "TINYINT(1)")
+    private boolean active;
 
     public Food(String name) {
         this.name = name;
-        this.isActive= true;
+        this.active= true;
     }
 
     public Long getId() {
@@ -39,11 +40,11 @@ public class Food {
         this.name = name;
     }
 
-    public boolean isActive() {
-        return isActive;
+    public boolean active() {
+        return active;
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.active = active;
     }
 }

@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import vnu.uet.cinema_manager.entity.Film;
 import vnu.uet.cinema_manager.repository.FilmRepository;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +27,10 @@ public class FilmService {
     public void saveFilm(Film film){
         film.setActive(true);
         filmRepository.save(film);
+    }
+
+    public List<Film> findAllByOpenDayBetween(String  dateStart, String dateEnd){
+        return filmRepository.findFilmBetween(dateStart, dateEnd);
     }
 
     public Film getFilmById(Long id){

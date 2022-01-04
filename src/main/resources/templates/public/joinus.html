@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:with="currentPage='joinus'"
+      layout:decorate="~{layout/default.html}"
+>
+<head>
+    <title>Trang chủ</title>
+</head>
+
+
+<body>
+<section layout:fragment="custom-content">
+    <main class="main-content">
+        <div class="container">
+            <div class="page">
+
+
+                <div class="content">
+                    <h2 class="section-title">Đồng hành cùng UET cinema</h2>
+                    <p>UET cinema trực thuộc UET Group một trong những tập đoàn kinh tế đa ngành lớn nhất của Hàn Quốc đã có mặt ở 21 quốc gia trên thế giới. UET cinema là một trong top 05 cụm rạp chiếu phim lớn nhất toàn cầu và là nhà phát hành, cụm rạp chiếu phim lớn nhất tại Việt Nam.</p>
+                    <p>UET cinema luôn mong muốn mang đến nhiều cơ hội làm việc cho các tài năng trẻ, năng động, yêu thích ngành công nghiệp điện ảnh.</p>
+
+                    <h2 class="section-title">Để gia nhập gia đình UET cinema và trở thành một UETer chính hiệu, bạn có thể tham khảo một số cách dưới đây:</h2>
+                    <p>Gửi CV kèm ảnh đến email tuyendung@vnu.edu.vn ghi rõ tiêu đề "[TÊN] - Ứng tuyển [VỊ TRÍ] – [NƠI LÀM VIỆC]"</p>
+                    <p>Đăng ký ứng tuyển trực tiếp  <a href="#">tại đây</a></p>
+                    <p> Nộp hồ sơ trực tiếp tại Quầy hướng dẫn của các cụm rạp CGV ứng viên mong muốn làm việc</p>
+
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h2 class="section-title">Lưu ý</h2>
+                            <p>UET cinema tuyển dụng không tốn bất kỳ chi phí nào. TUYỆT ĐỐI không nộp phí với bất kỳ hình thức nào</p>
+                            <p>UET cinema sẽ liên lạc với ứng viên phù hợp qua điện thoại/email.</p>
+                            <p>Hiện tại UET cinema không tuyển nhân viên thông qua đơn vị khác, ứng viên lưu ý để tránh các trường hợp lừa đảo tuyển dụng.</p>
+                            <p>Tất cả các thông tin tuyển dụng sẽ được đăng trên website <a href="https://uet.vnu.edu.vn/">uet.vnu.edu.vn</a>, các trang tuyển dụng uy tín và các kênh mạng xã hội của UET cinema.</p>
+
+                        </div>
+                        <div class="col-md-4">
+                            <figure><img th:src="@{/img/joinus.png}" alt="figure image"></figure>
+                        </div>
+                    </div> <!-- .row -->
+                </div>
+            </div>
+        </div> <!-- .container -->
+    </main>
+</section>
+
+</body>
+
+</html>

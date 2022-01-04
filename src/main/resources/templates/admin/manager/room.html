@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:with="currentPage='admin/manager/room'"
+      layout:decorate="~{layout/admin.html}"
+>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Phòng chiếu phim</title>
+</head>
+
+<body>
+
+<section layout:fragment="custom-content">
+
+    <div class="content-right__control">
+        <button class="btn btn-add  btn-add-show-modal">
+            Thêm
+        </button>
+    </div>
+
+    <table th:if="${#arrays.length(listRoom)}!= 0">
+        <thead>
+        <tr>
+            <th>Số thứ tự</th>
+            <th>Tên phòng</th>
+            <th>Số lượng ghế</th>
+            <th>Trạng thái hoạt động</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="element,iterStat  :${listRoom}">
+            <td th:text="${iterStat.count}"></td>
+            <td th:text="${element.name}"></td>
+            <td th:text="${element.slot}"></td>
+            <td th:text="${element.active}== true? 'Hoạt động': 'Không hoạt động'"></td>
+            <td>
+                <a class="btn btn-edit btn-edit-room"
+                   th:href="@{/admin/manager/getRoomById/(id=${element.id}) }">Sửa</a>
+                <!--<a  th:href="@{/admin/manager/delete/{id}(id=${element.id}) }">delete</a>-->
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="modal modal-add">
+        <form th:action="@{/admin/manager/saveRoom}" method="POST">
+            <div class="modal__container">
+                <div class="modal__close">
+                    <i class="fas fa-times"></i>
+                </div>
+                <div class="modal__header">
+                    <div class="modal__header-title">
+                        Thêm phòng chiếu phim
+                    </div>
+
+                </div>
+                <div class="modal__body">
+                    <div class="wrap-input">
+                        <div class="wrap-input-item">
+                            <label for="name" class="modal-label">
+                                Tên phòng
+                            </label>
+                            <input type="text" id="name" class="modal-input" name="name">
+                        </div>
+                    </div>
+                    <div class="wrap-input">
+                        <div class="wrap-input-item wrap-input-code">
+                            <label for="slot" class="modal-label">
+                                Số chỗ ngồi
+                            </label>
+                            <input type="number" id="slot" class="modal-input" name="slot">
+                        </div>
+                        <div class="wrap-input-item wrap-input-code">
+                            <label for="active" class="modal-label">
+                                Trạng thái
+                            </label>
+                            <select class="modal-input" id="active" name="active">
+                                <option value="true">Hoạt động</option>
+                                <option value="false">Không hoạt động</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <button class="btn btn-add" type="submit">
+                        Thêm
+                    </button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+    <div class="modal modal-edit">
+        <form th:action="@{/admin/manager/saveRoom}" method="POST">
+            <div class="modal__container">
+                <div class="modal__close">
+                    <i class="fas fa-times"></i>
+                </div>
+                <div class="modal__header">
+                    <div class="modal__header-title">
+                        Thêm phòng chiếu phim
+                    </div>
+
+                </div>
+                <div class="modal__body">
+                    <input type="hidden" id="id-room" class="modal-input" name="id">
+                    <div class="wrap-input">
+                        <div class="wrap-input-item">
+                            <label for="name-edit" class="modal-label">
+                                Tên phòng
+                            </label>
+                            <input type="text" id="name-edit" class="modal-input" name="name">
+                        </div>
+                    </div>
+                    <div class="wrap-input">
+                        <div class="wrap-input-item wrap-input-code">
+                            <label for="slot-edit" class="modal-label">
+                                Số chỗ ngồi
+                            </label>
+                            <input type="number" id="slot-edit" class="modal-input" name="slot">
+                        </div>
+                        <div class="wrap-input-item wrap-input-code">
+                            <label for="active-edit" class="modal-label">
+                                Trạng thái
+                            </label>
+                            <select class="modal-input" id="active-edit" name="active">
+                                <option value="true">Hoạt động</option>
+                                <option value="false">Không hoạt động</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <button class="btn btn-edit" type="submit">
+                        Lưu
+                    </button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+
+    </div>
+
+    <div class="modal modal-delete">
+        <div class="modal__container">
+            <div class="modal__close">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="modal__header">
+                <div class="modal__header-title">
+                    Xóa phim
+                </div>
+            </div>
+            <div class="modal__body">
+                <div class="modal__body-question">
+                    Bạn có chắn chắn muốn xóa phim?
+                </div>
+                <div class="modal__confirm">
+                    <button class="btn btn-yes">Có</button>
+                    <button class="btn btn-no">Không</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+
+</html>
+

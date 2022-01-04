@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:with="currentPage='home'"
+      layout:decorate="~{layout/default.html}"
+>
+<head>
+    <title th:utext="${film.name}"></title>
+    <style>
+        .btn{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            float: right;
+            min-width: 150px;
+            height: 34px;
+            text-decoration: none;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            padding: 0;
+            outline: none;
+            cursor: pointer;
+            font-weight: 450;
+            color: #ffffff;
+
+        }
+
+        .btn-buy-ticket {
+            background: #00cc00;
+        }
+        .disable-button{
+            pointer-events: none;
+            background: black;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+
+<body>
+<section layout:fragment="custom-content">
+    <div id="site-content">
+        <main class="main-content">
+            <div class="container">
+                <div class="page">
+                    <div class="col-md-4">
+                        <figure><img th:src="${film.banner}" alt="figure image" width="100%"></figure>
+
+                        <a
+                                th:href="@{/login}"
+                                th:classappend="${film.active}==false? 'disable-button'"
+                                class="btn btn-add btn-buy-ticket">
+                            Mua vé
+                        </a>
+                    </div>
+                    <div class="col-md-8">
+                        <p class="leading" th:utext="${film.name}"></p>
+                        <p><b>Đạo diễn: </b> <span th:utext="${film.directors}"></span></p>
+                        <p><b>Các diễn viên: </b> <span th:utext="${film.actors}"></span></p>
+                        <p><b>Thể loại: </b> <span th:utext="${film.category}"></span></p>
+                        <p><b>Ngày phát hành: </b> <span th:utext="${film.openDay}"></span></p>
+                        <p><b>Thời lượng: </b> <span th:utext="${film.time}"></span> (phút)</p>
+                        <p><b>Giá vé: </b> <span th:utext="${film.price}"></span> (VNĐ)</p>
+                        <p><b>Mô tả: </b> <span th:utext="${film.description}"></span></p>
+                        <p><b>Trạng thái hoạt động: </b> <span
+                                th:utext="${film.active}== true?'Có thể đặt vé':'Không thể đặt vé' "></span></p>
+                    </div>
+                </div>
+            </div> <!-- .container -->
+        </main>
+
+    </div>
+</section>
+
+</body>
+
+
+</html>

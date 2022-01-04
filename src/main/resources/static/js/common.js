@@ -68,15 +68,10 @@ modalContainerDelete.addEventListener("click", function(event) {
 $(document).ready(function () {
     $('table .btn').on('click', function (event) {
         event.preventDefault();
-        console.log("This is btn");
-
     });
 
     $('.btn-edit-film').on('click', function (event) {
-        console.log("btn-edit film");
-
         var href= $(this).attr('href');
-        console.log(href);
         $.get(href, function (film, status) {
             console.log(film);
             console.log(status);
@@ -92,7 +87,71 @@ $(document).ready(function () {
             $('#price-film-edit').val(film.price);
             $('#description-film-edit').val(film.description);
         });
-
-
     })
+
+    $('.btn-edit-customer').on('click', function (event) {
+        var href= $(this).attr('href');
+        $.get(href, function (customer, status){
+            $('#id-customer').val(customer.id);
+            $('#id-cart').val(customer.cart.cartId);
+            $('#fullName-edit').val(customer.fullName);
+            $('#username-edit').val(customer.user.username);
+            $('#cmnd-edit').val(customer.cmnd);
+            $('#phone-edit').val(customer.phone);
+            $('#email-edit').val(customer.email);
+            $('#address-edit').val(customer.address);
+            // $('#male-edit').val(customer.male );
+            document.getElementById('male-edit').value= customer.male ;
+            $('#date-register-edit').val(customer.dateRegister);
+            // $('#roles-edit').val(customer.user.roles);
+            document.getElementById('roles-edit').value= customer.user.roles;
+            // $('#is-active-edit').val(customer.user.active).change();
+            document.getElementById('is-active-edit').value= customer.user.active;
+        });
+    })
+
+    $('.btn-edit-food').on('click', function(event){
+        var href= $(this).attr('href');
+        $.get(href, function (food, status) {
+            $('#id-food').val(food.id);
+            $('#name-edit').val(food.name);
+            document.getElementById('active-edit').value= food.active;
+        })
+    })
+
+    $('.btn-edit-room').on('click', function(event){
+        var href= $(this).attr('href');
+        $.get(href, function (room, status) {
+            $('#id-room').val(room.id);
+            $('#name-edit').val(room.name);
+            $('#slot-edit').val(room.slot);
+            document.getElementById('active-edit').value= room.active;
+        })
+    })
+
+    $('.btn-edit-food-detail').on('click', function (event) {
+        var href= $(this).attr('href');
+        $.get(href, function (foodDetail, status){
+
+            $('#id-food-detail').val(foodDetail.id);
+            $('#name-edit').val(foodDetail.food.name);
+            $('#size-edit').val(foodDetail.size);
+            $('#price-edit').val(foodDetail.price);
+            $('#count-edit').val(foodDetail.count);
+            document.getElementById('active-edit').value= foodDetail.active;
+        });
+    })
+
+    $('.btn-edit-film-calendar').on('click', function (event) {
+        var href= $(this).attr('href');
+        $.get(href, function (filmCalendar, status){
+            $('#id-film-calendar').val(filmCalendar.id);
+            document.getElementById('id-film-edit').value= filmCalendar.film.id;
+            $('#date-calendar-edit').val(filmCalendar.dateCalendar);
+            document.getElementById('time-calendar-edit').value= filmCalendar.timeCalendar;
+            document.getElementById('id-room-edit').value= filmCalendar.room.id;
+
+        })
+    })
+
 })

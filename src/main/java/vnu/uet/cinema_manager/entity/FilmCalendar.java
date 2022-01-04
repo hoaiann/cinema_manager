@@ -20,6 +20,7 @@ public class FilmCalendar {
     private Long id;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateCalendar;
+    @Enumerated(EnumType.STRING)
     private TimeCalendar timeCalendar;
 
 
@@ -36,6 +37,14 @@ public class FilmCalendar {
         this.timeCalendar = timeCalendar;
         this.film = film;
         this.room = room;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public LocalDate getDateCalendar() {

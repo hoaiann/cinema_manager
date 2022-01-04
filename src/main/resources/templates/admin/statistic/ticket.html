@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:with="currentPage='admin/statistic/ticket'"
+      layout:decorate="~{layout/admin.html}"
+>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hóa đơn</title>
+</head>
+
+<body>
+<section layout:fragment="custom-content">
+    <table th:if="${#arrays.length(listTicket)}!= 0">
+        <thead>
+        <tr>
+            <th>Số thứ tự</th>
+            <th>Tên phim</th>
+            <th>Giá vé</th>
+            <th>Ngày chiếu</th>
+            <th>Thời gian chiếu</th>
+            <th>Phòng chiếu</th>
+            <th>Vị trí ghế</th>
+            <th>Đồ ăn</th>
+            <th>Kích thước</th>
+            <th>Giá</th>
+            <th>Ngày bán</th>
+            <th>Tổng tiền</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="element,iterStat  :${listTicket}">
+            <td th:text="${iterStat.count}"></td>
+            <td th:text="${element.filmCalendar.film.name}"></td>
+            <td th:text="${element.filmCalendar.film.price}"></td>
+            <td th:text="${element.filmCalendar.dateCalendar}"></td>
+            <td th:text="${element.filmCalendar.timeCalendar.getS}"></td>
+            <td th:text="${element.filmCalendar.room.name}"></td>
+            <td th:text="${element.slotLocation}"></td>
+            <td th:text="${element.foodSold}!= null ? ${element.foodSold.foodDetail.food.name}:'' "></td>
+            <td th:text="${element.foodSold}!= null ? ${element.foodSold.foodDetail.size}:''"></td>
+            <td th:text="${element.foodSold}!= null ? ${element.foodSold.foodDetail.price}:''"></td>
+            <td th:text="${element.dateSell}!=null?${element.dateSell}: 'Chưa bán' "></td>
+            <td th:text="${element.foodSold}!= null ?
+                ${element.foodSold.foodDetail.price}+${element.filmCalendar.film.price} :
+                 ${element.filmCalendar.film.price}"></td>
+
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+
+</body>
+</html>

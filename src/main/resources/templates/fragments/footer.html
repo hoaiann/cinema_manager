@@ -1,12 +1,71 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<body>
 
-<footer th:fragment="header">
-    <p>This is header </p>
-</footer>
-<footer th:fragment="footer">
-    <p>&copy; 2020 attacomsian.com</p>
+<body>
+<footer class="site-footer" th:fragment="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="widget">
+                    <h3 class="widget-title">Về chúng tôi</h3>
+                    <p>Trường Đại học Công nghệ - ĐHQGHN là thành viên của Đại học Quốc gia Hà Nội. Được thành lập vào năm 2004 từ Khoa Công nghệ, trường đã phát triển trong những năm qua trở thành một trong những trường tốt nhất Việt Nam về chuyên ngành Khoa học máy tính</p>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="widget">
+                    <h3 class="widget-title">UET</h3>
+                    <ul class="no-bullet">
+                        <li><a href="#">Giới thiệu</a></li>
+                        <li><a href="#">Tiện ích online</a></li>
+                        <li><a href="#">Thẻ quà tặng</a></li>
+                        <li><a href="#">Liên hệ quảng cáo</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="widget">
+                    <h3 class="widget-title">Điều khoản sử dụng</h3>
+                    <ul class="no-bullet">
+                        <li><a href="#">Điều khoản chung</a></li>
+                        <li><a href="#">Điều khoản giao dịch</a></li>
+                        <li><a href="#">Điều khoản thanh toán</a></li>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="widget">
+                    <h3 class="widget-title">Chăm sóc khách hàng</h3>
+                    <ul class="no-bullet">
+                        <li><a href="#">Điện thoại: 024.37547.461</a></li>
+                        <li><a href="#">Giờ làm việc: 08:00 - 17:00</a></li>
+                        <li><a href="#">Email hỗ trợ: hoidap@vnu.edu.vn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="widget">
+                    <h3 class="widget-title">Mạng xã hội</h3>
+                    <ul class="no-bullet">
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Google+</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="widget">
+                    <h3 class="widget-title">Bạn có muốn nhận thông báo mới nhất?</h3>
+                    <form action="#" class="subscribe-form">
+                        <input type="text" placeholder="Email Address">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="colophon">Copyright 2021 UET</div>
+    </div>
+
 </footer>
 </body>
 </html>

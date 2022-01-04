@@ -6,4 +6,5 @@ import vnu.uet.cinema_manager.entity.Bill;
 
 @Repository
 public interface BillRepository extends JpaRepository<Bill, Long> {
+
 }

@@ -18,20 +18,21 @@ public class User {
     private String username;
     private String password;
     private String roles;
-    private boolean isActive;
+    @Column(nullable = false, columnDefinition = "TINYINT(1)")
+    private boolean active;
 
 
-    private User (String username, String password, boolean isActive, String roles){
+    private User (String username, String password, boolean active, String roles){
       this.username= username;
       this.password= password;
-      this.isActive= isActive;
+      this.active= active;
       this.roles= roles;
     }
 
     public User(String username){
         this.username= username;
         this.password= username;
-        this.isActive= true;
+        this.active= true;
         this.roles="ROLE_CUSTOMER";
     }
 
@@ -39,7 +40,7 @@ public class User {
     public User(String username, String roles){
         this.username= username;
         this.password= username;
-        this.isActive= true;
+        this.active= true;
         this.roles=roles;
     }
 
@@ -68,10 +69,10 @@ public class User {
     }
 
     public boolean getActive() {
-        return isActive;
+        return active;
     }
 
-    public void setActive(Boolean active) {
-        isActive = active;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

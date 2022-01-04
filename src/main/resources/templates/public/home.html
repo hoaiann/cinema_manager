@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:with="currentPage='home'"
+      layout:decorate="~{layout/default.html}"
+>
+<head>
+    <title>Trang chủ</title>
+</head>
+
+
+<body>
+<section layout:fragment="custom-content">
+    <div id="site-content">
+        <main class="main-content">
+            <div class="container">
+                <div class="page">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="slider">
+                                <ul class="slides">
+                                    <li><a th:href="@{/film-details/{id}(id=${listResult[0].id}) }"><img th:src="${listResult[0].banner}" height="400" alt="Slide 1"></a></li>
+                                    <li><a th:href="@{/film-details/{id}(id=${listResult[1].id}) }"><img th:src="${listResult[1].banner}" height="400" alt="Slide 2"></a></li>
+                                    <li><a th:href="@{/film-details/{id}(id=${listResult[2].id}) }"><img th:src="${listResult[2].banner}" height="400" alt="Slide 3"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-12">
+                                    <div class="latest-movie">
+                                        <a th:href="@{/film-details/{id}(id=${listResult[3].id}) }">
+                                            <img th:src="${listResult[3].banner}" alt="Movie 1">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-12">
+                                    <div class="latest-movie">
+                                        <a th:href="@{/film-details/{id}(id=${listResult[4].id}) }">
+                                            <img th:src="${listResult[4].banner}" alt="Movie 2">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-12">
+                                    <div class="latest-movie">
+                                        <a th:href="@{/film-details/{id}(id=${listResult[5].id}) }">
+                                            <img th:src="${listResult[5].banner}" alt="Movie 2">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- .row -->
+
+                    <div class="row">
+                        <div class="col-sm-6 col-md-3">
+                            <div class="latest-movie">
+                                <a th:href="@{/film-details/{id}(id=${listResult[6].id}) }"><img th:src="${listResult[6].banner}" alt="Movie 3"></a>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="latest-movie">
+                                <a th:href="@{/film-details/{id}(id=${listResult[7].id}) }"><img th:src="${listResult[7].banner}" alt="Movie 4"></a>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="latest-movie">
+                                <a th:href="@{/film-details/{id}(id=${listResult[8].id}) }"><img th:src="${listResult[8].banner}" alt="Movie 5"></a>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="latest-movie">
+                                <a th:href="@{/film-details/{id}(id=${listResult[9].id}) }"><img th:src="${listResult[9].banner}" alt="Movie 6"></a>
+                            </div>
+                        </div>
+                    </div> <!-- .row -->
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h2 class="section-title">Trước tháng 12</h2>
+                            <ul class="movie-schedule">
+                                <li>
+                                    <div class="date" th:utext="${listFilmAfter12[0].openDay}"></div>
+                                    <h2 class="entry-title">
+                                        <a th:href="@{/film-details/{id}(id=${listFilmAfter12[0].id}) }"><span th:utext="${listFilmAfter12[0].name}"></span></a>
+                                    </h2>
+                                </li>
+                                <li>
+                                    <div class="date" th:utext="${listFilmAfter12[1].openDay}"></div>
+                                    <h2 class="entry-title">
+                                        <a th:href="@{/film-details/{id}(id=${listFilmAfter12[1].id}) }"><span th:utext="${listFilmAfter12[1].name}"></span></a>
+                                    </h2>
+                                </li>
+                                <li>
+                                    <div class="date" th:utext="${listFilmAfter12[2].openDay}"></div>
+                                    <h2 class="entry-title">
+                                        <a th:href="@{/film-details/{id}(id=${listFilmAfter12[2].id}) }"><span th:utext="${listFilmAfter12[2].name}"></span></a>
+                                    </h2>
+                                </li>
+                                <li>
+                                    <div class="date" th:utext="${listFilmAfter12[3].openDay}"></div>
+                                    <h2 class="entry-title">
+                                        <a th:href="@{/film-details/{id}(id=${listFilmAfter12[3].id}) }"><span th:utext="${listFilmAfter12[3].name}"></span></a>
+                                    </h2>
+                                </li>
+                                <li>
+                                    <div class="date" th:utext="${listFilmAfter12[4].openDay}"></div>
+                                    <h2 class="entry-title">
+                                        <a th:href="@{/film-details/{id}(id=${listFilmAfter12[4].id}) }"><span th:utext="${listFilmAfter12[4].name}"></span></a>
+                                    </h2>
+                                </li>
+
+                            </ul> <!-- .movie-schedule -->
+                        </div>
+                        <div class="col-md-4">
+                            <h2 class="section-title">Trong tháng 12</h2>
+
+                            <ul class="movie-schedule">
+                                <li>
+                                    <div class="date" th:utext="${listFilmIn12[0].openDay}"></div>
+                                    <h2 class="entry-title">
+                                        <a th:href="@{/film-details/{id}(id=${listFilmIn12[0].id}) }"><span th:utext="${listFilmIn12[0].name}"></span></a>
+                                    </h2>
+                                </li>
+                                <li>
+                                    <div class="date" th:utext="${listFilmIn12[1].openDay}"></div>
+                                    <h2 class="entry-title">
+                                        <a th:href="@{/film-details/{id}(id=${listFilmIn12[1].id}) }"><span th:utext="${listFilmIn12[1].name}"></span></a>
+                                    </h2>
+                                </li>
+                                <li>
+                                    <div class="date" th:utext="${listFilmIn12[2].openDay}"></div>
+                                    <h2 class="entry-title">
+                                        <a th:href="@{/film-details/{id}(id=${listFilmIn12[2].id}) }"><span th:utext="${listFilmIn12[2].name}"></span></a>
+                                    </h2>
+                                </li>
+                                <li>
+                                    <div class="date" th:utext="${listFilmIn12[3].openDay}"></div>
+                                    <h2 class="entry-title">
+                                        <a th:href="@{/film-details/{id}(id=${listFilmIn12[3].id}) }"><span th:utext="${listFilmIn12[3].name}"></span></a>
+                                    </h2>
+                                </li>
+                                <li>
+                                    <div class="date" th:utext="${listFilmIn12[4].openDay}"></div>
+                                    <h2 class="entry-title">
+                                        <a th:href="@{/film-details/{id}(id=${listFilmIn12[4].id}) }"><span th:utext="${listFilmIn12[4].name}"></span></a>
+                                    </h2>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h2 class="section-title">Năm 2022</h2>
+
+                            <ul class="movie-schedule">
+                                <li>
+                                    <div class="date" th:utext="${listFilm2022[0].openDay}"></div>
+                                    <h2 class="entry-title">
+                                        <a th:href="@{/film-details/{id}(id=${listFilm2022[0].id}) }"><span th:utext="${listFilm2022[0].name}"></span></a>
+                                    </h2>
+                                </li>
+                                <li>
+                                    <div class="date" th:utext="${listFilm2022[1].openDay}"></div>
+                                    <h2 class="entry-title">
+                                        <a th:href="@{/film-details/{id}(id=${listFilm2022[1].id}) }"><span th:utext="${listFilm2022[1].name}"></span></a>
+                                    </h2>
+                                </li>
+                                <li>
+                                    <div class="date" th:utext="${listFilm2022[2].openDay}"></div>
+                                    <h2 class="entry-title">
+                                        <a th:href="@{/film-details/{id}(id=${listFilm2022[2].id}) }"><span th:utext="${listFilm2022[2].name}"></span></a>
+                                    </h2>
+                                </li>
+                                <li>
+                                    <div class="date" th:utext="${listFilm2022[3].openDay}"></div>
+                                    <h2 class="entry-title">
+                                        <a th:href="@{/film-details/{id}(id=${listFilm2022[3].id}) }"><span th:utext="${listFilm2022[3].name}"></span></a>
+                                    </h2>
+                                </li>
+                                <li>
+                                    <div class="date" th:utext="${listFilm2022[4].openDay}"></div>
+                                    <h2 class="entry-title">
+                                        <a th:href="@{/film-details/{id}(id=${listFilm2022[4].id}) }"><span th:utext="${listFilm2022[4].name}"></span></a>
+                                    </h2>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- .container -->
+        </main>
+
+    </div>
+</section>
+
+</body>
+<style>
+    .slide{
+        background-size: cover;
+    }
+</style>
+
+</html>

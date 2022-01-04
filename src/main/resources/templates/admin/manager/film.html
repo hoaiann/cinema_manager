@@ -1,302 +1,310 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:with="currentPage='admin/manager/film'"
+      layout:decorate="~{layout/admin.html}"
+>
 
 <head>
     <meta charset="UTF-8">
-    <title>Film</title>
-    <link rel="stylesheet" th:href="@{/css/common.css}">
-
-    <!--<link rel="stylesheet" th:href="@{/css/bootstrap.min-3.4.1.css}">-->
-
-    <!--<script type="text/javascript" th:src="@{/js/bootstrap.min-3.4.1.js}"></script>-->
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-          integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"
-    />
-
-
+    <title>Phim</title>
 </head>
 
 <body>
+<section layout:fragment="custom-content">
+    <div class="content-right__control">
+        <button class="btn btn-add  btn-add-show-modal">
+            Thêm
+        </button>
+    </div>
+    <table th:if="${#arrays.length(listFilm)}!= 0">
+        <thead>
+            <tr>
+                <th>Số thứ tự</th>
+                <th>Ảnh giới thiệu</th>
+                <th>Tên phim</th>
+                <th>Tên đạo diễn</th>
+                <th>Các diễn viên</th>
+                <th>Thể loại</th>
+                <th>Ngày phát hành</th>
+                <th>Thời lượng( phút)</th>
+                <th>Giá vé( VNĐ)</th>
+                <th>Mô tả</th>
+                <th>Trạng thái hoạt động</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
 
-<div th:insert="fragments/footer :: header"></div>
+        <tr th:each="element,iterStat  :${listFilm}">
+            <td th:text="${iterStat.count}"></td>
+            <td><img class="img-table" width="150"  th:src="${element.banner}" alt=""></td>
+            <td th:text="${element.name}"></td>
+            <td th:text="${element.directors}"></td>
+            <td th:text="${element.actors}"></td>
+            <td th:text="${element.category}"></td>
+            <td width="5%" th:text="${element.openDay}"></td>
+            <td th:text="${element.time}"></td>
+            <td th:text="${element.price}"></td>
+            <td width="40%" th:text="${element.description}"></td>
+            <td th:text="${element.active}== true? 'Hoạt động': 'Không hoạt động'"></td>
+            <td>
+                <a class="btn btn-edit btn-edit-film" th:href="@{/admin/manager/getFilmById/(id=${element.id}) }">Sửa</a>
+                <!--<a  th:href="@{/admin/manager/delete/{id}(id=${element.id}) }">delete</a>-->
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
-<div class="content-right__control">
-    <button class="btn btn-add">
-        Thêm
-    </button>
-</div>
-<table>
-    <tbody>
-
-    <tr th:each="element :${listFilm}">
-        <td th:text="${element.name}"></td>
-        <td th:text="${element.directors}"></td>
-        <td th:text="${element.actors}"></td>
-        <td th:text="${element.category}"></td>
-        <td th:text="${element.openDay}"></td>
-        <td th:text="${element.time}"></td>
-        <td th:text="${element.price}"></td>
-        <td th:text="${element.description}"></td>
-        <td th:text="${element.isActive}"></td>
-        <td>
-            <a class="btn btn-edit btn-edit-film" th:href="@{/admin/manager/getFilmById/(id=${element.id}) }">update</a>
-            <!--<a  th:href="@{/admin/manager/delete/{id}(id=${element.id}) }">delete</a>-->
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-<div class="modal modal-add">
-    <form th:action="@{/admin/manager/saveFilm}" method="POST">
-        <div class="modal__container">
-            <div class="modal__close">
-                <i class="fas fa-times"></i>
-            </div>
-            <div class="modal__header">
-                <div class="modal__header-title">
-                    Thêm phim
+    <div class="modal modal-add">
+        <form th:action="@{/admin/manager/saveFilm}" method="POST">
+            <div class="modal__container">
+                <div class="modal__close">
+                    <i class="fas fa-times"></i>
                 </div>
-
-            </div>
-            <div class="modal__body">
-                <div class="wrap-input-item">
-                    <label for="name-film" class="modal-label">
-                        Tên phim
-                    </label>
-                    <input type="text" id="name-film" class="modal-input" name="name">
-                </div>
-
-                <div class="wrap-input-item ">
-                    <label for="banner-film" class="modal-label">
-                        Banner
-                    </label>
-                    <input type="file" id="banner-film" class="modal-input" name="banner">
-                </div>
-
-
-                <div class="wrap-input">
-                    <div class="wrap-input-item  wrap-input-code">
-                        <label for="directors" class="modal-label">
-                            Đạo diễn
-                        </label>
-                        <input type="text" id="directors" class="modal-input" name="directors">
+                <div class="modal__header">
+                    <div class="modal__header-title">
+                        Thêm phim
                     </div>
 
-                    <div class="wrap-input-item  wrap-input-code">
-                        <label for="actors" class="modal-label">
-                            Diễn viên
-                        </label>
-                        <input type="text" id="actors" class="modal-input" name="actors">
-                    </div>
                 </div>
-
-                <div class="wrap-input">
-                    <div class="wrap-input-item  wrap-input-code">
-                        <label for="category" class="modal-label">
-                            Thể loại
-                        </label>
-                        <input type="text" id="category" class="modal-input" name="category">
-                    </div>
-
-                    <div class="wrap-input-item  wrap-input-code">
-                        <label for="openDay" class="modal-label">
-                            Ngày phát hành
-                        </label>
-                        <input type="date" id="openDay" class="modal-input" name="openDay">
-                    </div>
-                </div>
-
-                <div class="wrap-input">
-                    <div class="wrap-input-item  wrap-input-code">
-                        <label for="time" class="modal-label">
-                            Thời lượng
-                        </label>
-                        <input type="text" id="time" class="modal-input" name="time">
-                    </div>
-
-                    <div class="wrap-input-item  wrap-input-code">
-                        <label for="price" class="modal-label">
-                            Giá
-                        </label>
-                        <input type="text" id="price" class="modal-input" name="price">
-                    </div>
-                </div>
-
-                <div class="wrap-input">
+                <div class="modal__body">
                     <div class="wrap-input-item">
-                        <label for="description" class="modal-label">
-                            Mô tả
+                        <label for="name-film" class="modal-label">
+                            Tên phim
                         </label>
-                        <textarea class="textarea" id="description" name="description" row="20" col="50">
-
-                     </textarea>
+                        <input type="text" id="name-film" required class="modal-input" name="name">
                     </div>
 
-
-                </div>
-
-
-                <button class="btn btn-add" id="add-film">
-                    Thêm
-                </button>
-            </div>
-
-        </div>
-    </form>
-</div>
-
-<div class="modal modal-edit">
-    <form th:action="@{/admin/manager/saveFilm}" method="POST">
-        <div class="modal__container">
-            <div class="modal__close">
-                <i class="fas fa-times"></i>
-            </div>
-            <div class="modal__header">
-                <div class="modal__header-title">
-                    Thêm phim
-                </div>
-
-            </div>
-            <div class="modal__body">
-                <input type="hidden" id="id-film" class="modal-input" name="id">
-                <div class="wrap-input-item ">
-                    <label for="name-film-edit" class="modal-label">
-                        Tên phim
-                    </label>
-                    <input type="text" id="name-film-edit" class="modal-input" name="name">
-                </div>
-
-
-                <div class="wrap-input">
-                    <div class="wrap-input-item wrap-input-code">
-                        <label for="banner-film-edit" class="modal-label">
+                    <div class="wrap-input-item ">
+                        <label for="banner-film" class="modal-label">
                             Banner
                         </label>
-                        <input type="file" id="banner-film-edit" class="modal-input" name="banner">
-                    </div>
-                    <div class="wrap-input-item wrap-input-code">
-                        <label for="active-film-edit" class="modal-label">
-                            Trạng thái
-                        </label>
-                        <select class="modal-input" id="active-film-edit" name="active">
-                            <option value="true">Hoạt động</option>
-                            <option value="false">Không hoạt động</option>
-                        </select>
+                        <input type="file" id="banner-film" class="modal-input" name="banner">
                     </div>
 
-                </div>
 
+                    <div class="wrap-input">
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="directors" class="modal-label">
+                                Đạo diễn
+                            </label>
+                            <input type="text" id="directors" class="modal-input" name="directors">
+                        </div>
 
-                <div class="wrap-input">
-                    <div class="wrap-input-item  wrap-input-code">
-                        <label for="directors-film-edit" class="modal-label">
-                            Đạo diễn
-                        </label>
-                        <input type="text" id="directors-film-edit" class="modal-input" name="directors">
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="actors" class="modal-label">
+                                Diễn viên
+                            </label>
+                            <input type="text" id="actors" class="modal-input" name="actors">
+                        </div>
                     </div>
 
-                    <div class="wrap-input-item  wrap-input-code">
-                        <label for="actors-film-edit" class="modal-label">
-                            Diễn viên
-                        </label>
-                        <input type="text" id="actors-film-edit" class="modal-input" name="actors">
-                    </div>
-                </div>
+                    <div class="wrap-input">
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="category" class="modal-label">
+                                Thể loại
+                            </label>
+                            <input type="text" id="category" required class="modal-input" name="category">
+                        </div>
 
-                <div class="wrap-input">
-                    <div class="wrap-input-item  wrap-input-code">
-                        <label for="category-film-edit" class="modal-label">
-                            Thể loại
-                        </label>
-                        <input type="text" id="category-film-edit" class="modal-input" name="category">
-                    </div>
-
-                    <div class="wrap-input-item  wrap-input-code">
-                        <label for="openDay-film-edit" class="modal-label">
-                            Ngày phát hành
-                        </label>
-                        <input type="date" id="openDay-film-edit" class="modal-input" name="openDay">
-                    </div>
-                </div>
-
-                <div class="wrap-input">
-                    <div class="wrap-input-item  wrap-input-code">
-                        <label for="time-film-edit" class="modal-label">
-                            Thời lượng
-                        </label>
-                        <input type="text" id="time-film-edit" class="modal-input" name="time">
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="openDay" class="modal-label">
+                                Ngày phát hành
+                            </label>
+                            <input type="date" id="openDay" class="modal-input" name="openDay">
+                        </div>
                     </div>
 
-                    <div class="wrap-input-item  wrap-input-code">
-                        <label for="price-film-edit" class="modal-label">
-                            Giá
-                        </label>
-                        <input type="text" id="price-film-edit" class="modal-input" name="price">
-                    </div>
-                </div>
+                    <div class="wrap-input">
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="time" class="modal-label">
+                                Thời lượng
+                            </label>
+                            <input type="text" id="time" class="modal-input" name="time">
+                        </div>
 
-                <div class="wrap-input">
-                    <div class="wrap-input-item">
-                        <label for="description-film-edit" class="modal-label">
-                            Mô tả
-                        </label>
-                        <textarea class="textarea" id="description-film-edit" name="description" row="20" col="50">
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="price" class="modal-label">
+                                Giá
+                            </label>
+                            <input type="text" id="price" class="modal-input" name="price">
+                        </div>
+                    </div>
+
+                    <div class="wrap-input">
+                        <div class="wrap-input-item">
+                            <label for="description" class="modal-label">
+                                Mô tả
+                            </label>
+                            <textarea class="textarea" id="description" name="description" row="20" col="50">
 
                      </textarea>
+                        </div>
+
+
                     </div>
 
 
+                    <button class="btn btn-add" id="add-film">
+                        Thêm
+                    </button>
                 </div>
 
-
-                <button class="btn btn-edit" id="edit-film">
-                    Lưu
-                </button>
             </div>
+        </form>
+    </div>
 
-        </div>
-    </form>
-</div>
+    <div class="modal modal-edit">
+        <form th:action="@{/admin/manager/saveFilm}" method="POST">
+            <div class="modal__container">
+                <div class="modal__close">
+                    <i class="fas fa-times"></i>
+                </div>
+                <div class="modal__header">
+                    <div class="modal__header-title">
+                        Thêm phim
+                    </div>
+
+                </div>
+                <div class="modal__body">
+                    <input type="hidden" id="id-film" class="modal-input" name="id">
+                    <div class="wrap-input-item ">
+                        <label for="name-film-edit" class="modal-label">
+                            Tên phim
+                        </label>
+                        <input type="text" id="name-film-edit" class="modal-input" name="name">
+                    </div>
 
 
-</div>
+                    <div class="wrap-input">
+                        <div class="wrap-input-item wrap-input-code">
+                            <label for="banner-film-edit" class="modal-label">
+                                Banner
+                            </label>
+                            <input type="file" id="banner-film-edit" class="modal-input" name="banner">
+                        </div>
+                        <div class="wrap-input-item wrap-input-code">
+                            <label for="active-film-edit" class="modal-label">
+                                Trạng thái
+                            </label>
+                            <select class="modal-input" id="active-film-edit" name="active">
+                                <option value="true">Hoạt động</option>
+                                <option value="false">Không hoạt động</option>
+                            </select>
+                        </div>
 
-<div class="modal modal-delete">
-    <div class="modal__container">
-        <div class="modal__close">
-            <i class="fas fa-times"></i>
-        </div>
-        <div class="modal__header">
-            <div class="modal__header-title">
-                Xóa phim
+                    </div>
+
+
+                    <div class="wrap-input">
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="directors-film-edit" class="modal-label">
+                                Đạo diễn
+                            </label>
+                            <input type="text" id="directors-film-edit" class="modal-input" name="directors">
+                        </div>
+
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="actors-film-edit" class="modal-label">
+                                Diễn viên
+                            </label>
+                            <input type="text" id="actors-film-edit" class="modal-input" name="actors">
+                        </div>
+                    </div>
+
+                    <div class="wrap-input">
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="category-film-edit" class="modal-label">
+                                Thể loại
+                            </label>
+                            <input type="text" id="category-film-edit" class="modal-input" name="category">
+                        </div>
+
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="openDay-film-edit" class="modal-label">
+                                Ngày phát hành
+                            </label>
+                            <input type="date" id="openDay-film-edit" class="modal-input" name="openDay">
+                        </div>
+                    </div>
+
+                    <div class="wrap-input">
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="time-film-edit" class="modal-label">
+                                Thời lượng
+                            </label>
+                            <input type="text" id="time-film-edit" class="modal-input" name="time">
+                        </div>
+
+                        <div class="wrap-input-item  wrap-input-code">
+                            <label for="price-film-edit" class="modal-label">
+                                Giá
+                            </label>
+                            <input type="text" id="price-film-edit" class="modal-input" name="price">
+                        </div>
+                    </div>
+
+                    <div class="wrap-input">
+                        <div class="wrap-input-item">
+                            <label for="description-film-edit" class="modal-label">
+                                Mô tả
+                            </label>
+                            <textarea class="textarea" id="description-film-edit" name="description" row="20" col="50">
+
+                     </textarea>
+                        </div>
+
+
+                    </div>
+
+
+                    <button class="btn btn-edit" id="edit-film">
+                        Lưu
+                    </button>
+                </div>
+
             </div>
-        </div>
-        <div class="modal__body">
-            <div class="modal__body-question">
-                Bạn có chắn chắn muốn xóa phim?
+        </form>
+    </div>
+
+
+    </div>
+
+    <div class="modal modal-delete">
+        <div class="modal__container">
+            <div class="modal__close">
+                <i class="fas fa-times"></i>
             </div>
-            <div class="modal__confirm">
-                <button class="btn btn-yes">Có</button>
-                <button class="btn btn-no">Không</button>
+            <div class="modal__header">
+                <div class="modal__header-title">
+                    Xóa phim
+                </div>
+            </div>
+            <div class="modal__body">
+                <div class="modal__body-question">
+                    Bạn có chắn chắn muốn xóa phim?
+                </div>
+                <div class="modal__confirm">
+                    <button class="btn btn-yes">Có</button>
+                    <button class="btn btn-no">Không</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div th:insert="fragments/footer :: footer"></div>
-
+</section>
 
 </body>
-<script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/common.js}"></script>
 <style>
     .textarea {
         width: 100%;
         font-size: 13px;
         height: 60px;
+    }
+    .img-table{
+
     }
 </style>
 </html>
